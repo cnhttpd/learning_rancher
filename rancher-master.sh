@@ -1,6 +1,7 @@
 #! /bin/bash
 
 yum update -y
+yum install net-tools vim -y
 curl -fsSL https://get.docker.com/ | sh
 sudo systemctl enable docker.service
 sudo systemctl start docker

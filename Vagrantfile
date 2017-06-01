@@ -13,6 +13,7 @@ Vagrant.configure("2") do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "centos/7"
+  config.vm.box_check_update    = false
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -25,7 +26,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "rancher-master", primary: true do |node|
     node.vm.hostname  = "rancher-master"
-    node.vm.network "private_network", ip: "192.168.65.210"
+    node.vm.network "private_network", ip: "192.168.65.210", nm_controlled: "yes"
 
     node.vm.provider "virtualbox" do |vb|
       vb.name         = "rancher-master"
@@ -37,7 +38,7 @@ Vagrant.configure("2") do |config|
   for i in 1..1
     config.vm.define "rancher-node#{i}" do |node|
       node.vm.hostname = "rancher-node#{i}"
-      node.vm.network "private_network", ip: "192.168.65.#{i + 210}"
+      node.vm.network "private_network", ip: "192.168.65.#{i + 210}", nm_controlled: "yes"
 
       node.vm.provider "virtualbox" do |vb|
         vb.name       = "rancher-node#{i}"
